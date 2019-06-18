@@ -53,6 +53,7 @@ namespace AssistantRobotSupervisingService
         private Task tcpListenTask;
 
         private Socket tcpTransferSocket;
+        private bool tcpTransferSocketEstablished = false;
         private bool ifGetVideoSendCmdOnce = false;
         private readonly int tcpTransferSocketRecieveTimeOut = 3 * 1000;
         private System.Timers.Timer tcpBeatClocker;
@@ -241,7 +242,8 @@ namespace AssistantRobotSupervisingService
                     ifGetVideoSendCmdOnce = false;
                     break;
                 }
-                tcpTransferSocket = tcpListenSocket.EndAccept(acceptResult); 
+                tcpTransferSocket = tcpListenSocket.EndAccept(acceptResult);
+                tcpTransferSocketEstablished = true;
                 tcpTransferSocket.ReceiveTimeout = tcpTransferSocketRecieveTimeOut;
                 Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service tcp transfer connection is established.");
 
@@ -277,9 +279,13 @@ namespace AssistantRobotSupervisingService
                 ifGetVideoSendCmdOnce = false;
             }
 
-            if (ifCloseFromInnerSide) OnSendCloseService();
-
             Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service tcp listener stops.");
+
+            if (ifCloseFromInnerSide)
+            {
+                Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service close from inner side.");
+                OnSendCloseService();
+            }
         }
 
         /// <summary>
@@ -395,7 +401,10 @@ namespace AssistantRobotSupervisingService
         /// </summary>
         private void EndAllLoop()
         {
-            tcpTransferCancel.Cancel();
+            if (!Object.Equals(tcpTransferCancel, null))
+            {
+                tcpTransferCancel.Cancel();
+            }
             udpSendClocker.Stop();
             tcpBeatClocker.Stop();
         }
@@ -405,8 +414,12 @@ namespace AssistantRobotSupervisingService
         /// </summary>
         private void FinishAllConnection()
         {
-            tcpTransferSocket.Shutdown(SocketShutdown.Both);
-            tcpTransferSocket.Close();
+            if (tcpTransferSocketEstablished)
+            {
+                tcpTransferSocket.Shutdown(SocketShutdown.Both);
+                tcpTransferSocket.Close();
+                tcpTransferSocketEstablished = false;
+            }
 
             Thread.Sleep(udpTransferSocketInterval);
             udpTransferSocket.Shutdown(SocketShutdown.Both);
@@ -435,7 +448,7 @@ namespace AssistantRobotSupervisingService
             }
 
             // 利用公钥加密
-            if (remoteDevicePublicKey.Equals(null)) return; // 无公钥直接退出
+            if (Object.Equals(remoteDevicePublicKey, null)) return; // 无公钥直接退出
             int byteLength = imgBytes.Length;
             int unitLength = remoteDevicePublicKeyLength / 8 - 11;
             int intgePart = byteLength / unitLength;

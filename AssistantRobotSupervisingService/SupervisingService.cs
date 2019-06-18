@@ -7,6 +7,9 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
+
+using LogPrinter;
 
 namespace AssistantRobotSupervisingService
 {
@@ -26,6 +29,7 @@ namespace AssistantRobotSupervisingService
             sf = new ServerFunction(out ifLoadedSuccess);
             if (!ifLoadedSuccess)
             {
+                Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service close at initial pos.");
                 Stop();
                 return;
             }
@@ -44,7 +48,10 @@ namespace AssistantRobotSupervisingService
         {
             if (ifLoadedSuccess && !ifCloseFromServerFunction)
             {
+                Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service close from outer side.");
+                
                 sf.StopListenLoop().Wait();
+                Logger.HistoryPrinting(Logger.Level.INFO, MethodBase.GetCurrentMethod().DeclaringType.FullName, "Video server service ready to closed.");
             }
         }
     }

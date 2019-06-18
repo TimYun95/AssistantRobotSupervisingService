@@ -14,16 +14,21 @@ namespace AssistantRobotSupervisingService
     {
 
         #region 字段
-        private const string logPath = "Log\\";
-        private const string logHistoryPath = "Log\\History\\";
-        private const string logConfFilePath = "Log\\Log.config";
+        private static readonly string logPath = "Log\\";
+        private static readonly string logHistoryPath = "Log\\History\\";
+        private static readonly string logConfFilePath = "Log\\Log.config";
         #endregion
 
         #region 方法
         /// <summary>
         /// 私有构造函数
         /// </summary>
-        static Functions() { }
+        static Functions() 
+        {
+            logPath = AppDomain.CurrentDomain.BaseDirectory + logPath;
+            logHistoryPath = AppDomain.CurrentDomain.BaseDirectory + logHistoryPath;
+            logConfFilePath = AppDomain.CurrentDomain.BaseDirectory + logConfFilePath;
+        }
 
         /// <summary>
         /// 检查环境是否符合要求
