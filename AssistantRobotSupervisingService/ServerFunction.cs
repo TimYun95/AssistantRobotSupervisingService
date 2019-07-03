@@ -105,7 +105,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "ifAtSamePC" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "ifAtSamePC" + ") is wrong.");
                 return;
             }
 
@@ -114,7 +114,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "serverIPAtDiffPC" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "serverIPAtDiffPC" + ") is wrong.");
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "tcpTransferSocketRecieveTimeOut" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "tcpTransferSocketRecieveTimeOut" + ") is wrong.");
                 return;
             }
 
@@ -134,7 +134,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "udpTransferSocketInterval" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "udpTransferSocketInterval" + ") is wrong.");
                 return;
             }
 
@@ -144,7 +144,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "udpTransferSocketSendTimeOut" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "udpTransferSocketSendTimeOut" + ") is wrong.");
                 return;
             }
 
@@ -154,7 +154,7 @@ namespace AssistantRobotSupervisingService
             else
             {
                 ifSuccessConstructed = false;
-                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "cameraIndex" + ") is wrong");
+                Logger.HistoryPrinting(Logger.Level.WARN, MethodBase.GetCurrentMethod().DeclaringType.FullName, "App configuration parameter(" + "cameraIndex" + ") is wrong.");
                 return;
             }
 
