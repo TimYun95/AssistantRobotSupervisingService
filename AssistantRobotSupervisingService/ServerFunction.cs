@@ -49,16 +49,16 @@ namespace AssistantRobotSupervisingService
         #region 字段
         private readonly bool ifAtSamePC = true;
 
-        private const int clientPortTCPAtSamePC = 40007;
-        private const int clientPortUDPAtSamePC = 40008;
+        private const int clientPortTCPAtSamePC = 40011;
+        private const int clientPortUDPAtSamePC = 40012;
         private const string serverIPAtSamePC = "127.0.0.1";
 
-        private const int clientPortTCPAtDiffPC = 40005;
-        private const int clientPortUDPAtDiffPC = 40006;
+        private const int clientPortTCPAtDiffPC = 40009;
+        private const int clientPortUDPAtDiffPC = 40010;
         private readonly string serverIPAtDiffPC = "192.168.1.13"; // 应该是192.168.1.13
 
-        private const int serverPortTCPAny = 40005;
-        private const int serverPortUDPAny = 40006;
+        private const int serverPortTCPAny = 40009;
+        private const int serverPortUDPAny = 40010;
 
         private Socket tcpListenSocket;
         private CancellationTokenSource tcpListenCancel;
